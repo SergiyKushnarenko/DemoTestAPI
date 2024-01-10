@@ -1,5 +1,6 @@
 ﻿using Application.Users.Commands;
 using Application.Users.DTOs;
+using Application.Users.Queries;
 using Domain.Common;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -18,15 +19,15 @@ namespace LikeAPI.Controllers
 
 
         /// <summary>
-        /// Upload file for user returns link for put request
+        /// Get All Users
         /// </summary>
         /// <returns></returns>
-        [HttpPost("GetAllUsers")]
+        [HttpGet("GetAllUsers")]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [ProducesResponseType(typeof(ResponseModelBase<UserInfoDto>), 200)]
         public async Task<IActionResult> GetAllUsers()
         {
-            var result = await Mediator.Send(new CreateUserCommand());
+            var result = await Mediator.Send(new CreateUserQuery());
 
             return Ok(result.GetResponse());
         }
